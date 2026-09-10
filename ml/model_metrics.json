@@ -1,0 +1,5 @@
+{
+  "test_accuracy": 0.8925,
+  "n_train": 1600,
+  "n_test": 400
+}

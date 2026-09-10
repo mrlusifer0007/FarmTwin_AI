@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: agritwin-backend
+    runtime: python
+    plan: starter
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app.main:app -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT --workers 2 --timeout 120"
+    rootDir: backend
+    envVars:
+      - key: DATABASE_URL
+        sync: false # Set to your Neon PostgreSQL connection string (postgresql://...)
+      - key: CORS_ORIGINS
+        sync: false # set to your deployed Vercel frontend URL
+      - key: GEE_SERVICE_ACCOUNT
+        sync: false
+      - key: GEE_PRIVATE_KEY_JSON
+        sync: false # paste the full contents of the downloaded key JSON here
+      - key: GEE_PROJECT
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: ANTHROPIC_MODEL
+        value: claude-sonnet-5
